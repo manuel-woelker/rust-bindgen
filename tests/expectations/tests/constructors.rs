@@ -5,7 +5,7 @@
 
 
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Default, Copy)]
 pub struct TestOverload {
     pub _address: u8,
 }
@@ -41,7 +41,7 @@ impl TestOverload {
     }
 }
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Default, Copy)]
 pub struct TestPublicNoArgs {
     pub _address: u8,
 }

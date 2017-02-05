@@ -10,6 +10,9 @@ pub struct Base<T> {
     pub _address: u8,
     pub _phantom_0: ::std::marker::PhantomData<T>,
 }
+impl <T> Default for Base<T> {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+}
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct Derived {
@@ -23,11 +26,17 @@ fn bindgen_test_layout_Derived() {
 impl Clone for Derived {
     fn clone(&self) -> Self { *self }
 }
+impl Default for Derived {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+}
 #[repr(C)]
 #[derive(Debug)]
 pub struct BaseWithDestructor<T> {
     pub _address: u8,
     pub _phantom_0: ::std::marker::PhantomData<T>,
+}
+impl <T> Default for BaseWithDestructor<T> {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
 }
 #[repr(C)]
 #[derive(Debug)]
@@ -40,6 +49,9 @@ fn bindgen_test_layout_DerivedFromBaseWithDestructor() {
                1usize);
     assert_eq!(::std::mem::align_of::<DerivedFromBaseWithDestructor>() ,
                1usize);
+}
+impl Default for DerivedFromBaseWithDestructor {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
 }
 #[test]
 fn __bindgen_test_layout_template_1() {

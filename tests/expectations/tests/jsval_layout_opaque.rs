@@ -96,7 +96,7 @@ pub enum JSWhyMagic {
     JS_WHY_MAGIC_COUNT = 18,
 }
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Default, Copy)]
 pub struct jsval_layout {
     pub asBits: __BindgenUnionField<u64>,
     pub debugView: __BindgenUnionField<jsval_layout__bindgen_ty_1>,
@@ -119,6 +119,9 @@ fn bindgen_test_layout_jsval_layout__bindgen_ty_1() {
 }
 impl Clone for jsval_layout__bindgen_ty_1 {
     fn clone(&self) -> Self { *self }
+}
+impl Default for jsval_layout__bindgen_ty_1 {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
 }
 impl jsval_layout__bindgen_ty_1 {
     #[inline]
@@ -152,12 +155,12 @@ impl jsval_layout__bindgen_ty_1 {
     }
 }
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Default, Copy)]
 pub struct jsval_layout__bindgen_ty_2 {
     pub payload: jsval_layout__bindgen_ty_2__bindgen_ty_1,
 }
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Default, Copy)]
 pub struct jsval_layout__bindgen_ty_2__bindgen_ty_1 {
     pub i32: __BindgenUnionField<i32>,
     pub u32: __BindgenUnionField<u32>,
@@ -186,7 +189,7 @@ impl Clone for jsval_layout {
     fn clone(&self) -> Self { *self }
 }
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Default, Copy)]
 pub struct Value {
     pub data: jsval_layout,
 }

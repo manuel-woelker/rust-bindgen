@@ -20,6 +20,9 @@ pub mod root {
     impl Clone for d {
         fn clone(&self) -> Self { *self }
     }
+    impl Default for d {
+        fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+    }
     #[repr(C)]
     #[derive(Debug, Copy)]
     pub struct i {
@@ -34,6 +37,9 @@ pub mod root {
     }
     impl Clone for i {
         fn clone(&self) -> Self { *self }
+    }
+    impl Default for i {
+        fn default() -> Self { unsafe { ::std::mem::zeroed() } }
     }
     #[repr(u32)]
     #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -59,5 +65,8 @@ pub mod root {
     fn bindgen_test_layout_F() {
         assert_eq!(::std::mem::size_of::<F>() , 264usize);
         assert_eq!(::std::mem::align_of::<F>() , 8usize);
+    }
+    impl Default for F {
+        fn default() -> Self { unsafe { ::std::mem::zeroed() } }
     }
 }
