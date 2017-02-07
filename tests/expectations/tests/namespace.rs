@@ -28,7 +28,7 @@ pub mod root {
             pub fn foo();
         }
         #[repr(C)]
-        #[derive(Debug, Copy)]
+        #[derive(Debug, Default, Copy)]
         pub struct A {
             pub b: root::whatever::whatever_int_t,
         }
@@ -65,6 +65,9 @@ pub mod root {
         pub m_c_ptr: *mut T,
         pub m_c_arr: [T; 10usize],
     }
+    impl <T> Default for C<T> {
+        fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+    }
     pub mod w {
         #[allow(unused_imports)]
         use self::super::super::root;
@@ -73,6 +76,9 @@ pub mod root {
         #[derive(Debug)]
         pub struct D<T> {
             pub m_c: root::C<T>,
+        }
+        impl <T> Default for D<T> {
+            fn default() -> Self { unsafe { ::std::mem::zeroed() } }
         }
         extern "C" {
             #[link_name = "_ZN1w3hehEv"]

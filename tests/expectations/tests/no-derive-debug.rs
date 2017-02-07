@@ -3,7 +3,7 @@
 
 #![allow(non_snake_case)]
 
-#[repr(C)] #[derive(Copy, Clone)] pub struct foo { bar: ::std::os::raw::c_int, }
+#[repr(C)] #[derive(Copy, Clone, Default)] pub struct foo { bar: ::std::os::raw::c_int, }
 
 /**
  * bar should compile. It will normally derive debug, but our blacklist of foo
@@ -11,7 +11,7 @@
  * from building if --no-derive-debug didn't work.
  */
 #[repr(C)]
-#[derive(Copy)]
+#[derive(Default, Copy)]
 pub struct bar {
     pub foo: foo,
     pub baz: ::std::os::raw::c_int,

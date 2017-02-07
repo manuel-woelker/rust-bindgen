@@ -23,6 +23,9 @@ pub mod root {
     impl Clone for d {
         fn clone(&self) -> Self { *self }
     }
+    impl Default for d {
+        fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+    }
     #[repr(C)]
     #[derive(Debug, Copy)]
     pub struct i {
@@ -46,6 +49,9 @@ pub mod root {
     }
     impl Clone for i {
         fn clone(&self) -> Self { *self }
+    }
+    impl Default for i {
+        fn default() -> Self { unsafe { ::std::mem::zeroed() } }
     }
     #[repr(u32)]
     #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
@@ -74,5 +80,8 @@ pub mod root {
         assert_eq! (unsafe {
                     & ( * ( 0 as * const F ) ) . w as * const _ as usize } ,
                     0usize);
+    }
+    impl Default for F {
+        fn default() -> Self { unsafe { ::std::mem::zeroed() } }
     }
 }

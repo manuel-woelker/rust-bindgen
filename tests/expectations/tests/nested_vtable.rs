@@ -5,6 +5,7 @@
 
 
 #[repr(C)]
+#[derive(Default)]
 pub struct nsISupports__bindgen_vtable {
 }
 #[repr(C)]
@@ -20,6 +21,9 @@ fn bindgen_test_layout_nsISupports() {
 impl Clone for nsISupports {
     fn clone(&self) -> Self { *self }
 }
+impl Default for nsISupports {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+}
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct nsIRunnable {
@@ -33,6 +37,9 @@ fn bindgen_test_layout_nsIRunnable() {
 impl Clone for nsIRunnable {
     fn clone(&self) -> Self { *self }
 }
+impl Default for nsIRunnable {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+}
 #[repr(C)]
 #[derive(Debug, Copy)]
 pub struct Runnable {
@@ -45,4 +52,7 @@ fn bindgen_test_layout_Runnable() {
 }
 impl Clone for Runnable {
     fn clone(&self) -> Self { *self }
+}
+impl Default for Runnable {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
 }

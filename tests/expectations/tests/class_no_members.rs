@@ -5,7 +5,7 @@
 
 
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Default, Copy)]
 pub struct whatever {
     pub _address: u8,
 }
@@ -18,7 +18,7 @@ impl Clone for whatever {
     fn clone(&self) -> Self { *self }
 }
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Default, Copy)]
 pub struct whatever_child {
     pub _address: u8,
 }
@@ -31,7 +31,7 @@ impl Clone for whatever_child {
     fn clone(&self) -> Self { *self }
 }
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Default, Copy)]
 pub struct whatever_child_with_member {
     pub m_member: ::std::os::raw::c_int,
 }

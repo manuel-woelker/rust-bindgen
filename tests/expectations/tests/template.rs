@@ -12,6 +12,9 @@ pub struct Foo<T, U> {
     pub m_member_arr: [T; 1usize],
     pub _phantom_1: ::std::marker::PhantomData<U>,
 }
+impl <T, U> Default for Foo<T, U> {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+}
 extern "C" {
     #[link_name = "_Z3bar3FooIiiE"]
     pub fn bar(foo: Foo<::std::os::raw::c_int, ::std::os::raw::c_int>);
@@ -30,12 +33,21 @@ pub struct D_U<T, Z> {
     pub m_baz: Z,
     pub _phantom_0: ::std::marker::PhantomData<T>,
 }
+impl <T, Z> Default for D_U<T, Z> {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+}
+impl <T> Default for D<T> {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Rooted<T> {
     pub prev: *mut T,
     pub next: *mut Rooted<*mut ::std::os::raw::c_void>,
     pub ptr: T,
+}
+impl <T> Default for Rooted<T> {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
 }
 #[repr(C)]
 #[derive(Debug, Copy)]
@@ -53,10 +65,16 @@ fn bindgen_test_layout_RootedContainer() {
 impl Clone for RootedContainer {
     fn clone(&self) -> Self { *self }
 }
+impl Default for RootedContainer {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+}
 #[repr(C)]
 #[derive(Debug)]
 pub struct WithDtor<T> {
     pub member: T,
+}
+impl <T> Default for WithDtor<T> {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
 }
 pub type WithDtorIntFwd = WithDtor<::std::os::raw::c_int>;
 #[repr(C)]
@@ -72,14 +90,20 @@ fn bindgen_test_layout_PODButContainsDtor() {
                 & ( * ( 0 as * const PODButContainsDtor ) ) . member as *
                 const _ as usize } , 0usize);
 }
+impl Default for PODButContainsDtor {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+}
 /** <div rustbindgen opaque> */
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Opaque<T> {
     pub _phantom_0: ::std::marker::PhantomData<T>,
 }
+impl <T> Default for Opaque<T> {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+}
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Default, Copy)]
 pub struct POD {
     pub opaque_member: u32,
 }
@@ -102,16 +126,25 @@ impl Clone for POD {
 pub struct NestedReplaced<T> {
     pub buff: *mut T,
 }
+impl <T> Default for NestedReplaced<T> {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct NestedBase<T, U> {
     pub buff: *mut T,
     pub _phantom_1: ::std::marker::PhantomData<U>,
 }
+impl <T, U> Default for NestedBase<T, U> {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Incomplete<T> {
     pub d: T,
+}
+impl <T> Default for Incomplete<T> {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
 }
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -120,8 +153,11 @@ pub struct NestedContainer<T> {
     pub nested: NestedReplaced<T>,
     pub inc: Incomplete<T>,
 }
+impl <T> Default for NestedContainer<T> {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+}
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Default, Copy)]
 pub struct Untemplated {
     pub _address: u8,
 }
@@ -139,6 +175,9 @@ pub struct Templated<T> {
     pub m_untemplated: Untemplated,
     pub _phantom_0: ::std::marker::PhantomData<T>,
 }
+impl <T> Default for Templated<T> {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+}
 /**
  * If the replacement doesn't happen at the parse level the container would be
  * copy and the replacement wouldn't, so this wouldn't compile.
@@ -150,15 +189,24 @@ pub struct Templated<T> {
 pub struct ReplacedWithoutDestructor<T> {
     pub buff: *mut T,
 }
+impl <T> Default for ReplacedWithoutDestructor<T> {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+}
 #[repr(C)]
 #[derive(Debug)]
 pub struct ShouldNotBeCopiable<T> {
     pub m_member: ReplacedWithoutDestructor<T>,
 }
+impl <T> Default for ShouldNotBeCopiable<T> {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+}
 #[repr(C)]
 #[derive(Debug)]
 pub struct ShouldNotBeCopiableAsWell<U> {
     pub m_member: ReplacedWithoutDestructorFwd<U>,
+}
+impl <U> Default for ShouldNotBeCopiableAsWell<U> {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
 }
 /**
  * If the replacement doesn't happen at the parse level the container would be
@@ -171,11 +219,17 @@ pub struct ShouldNotBeCopiableAsWell<U> {
 pub struct ReplacedWithoutDestructorFwd<T> {
     pub buff: *mut T,
 }
+impl <T> Default for ReplacedWithoutDestructorFwd<T> {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
+}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct TemplateWithVar<T> {
     pub _address: u8,
     pub _phantom_0: ::std::marker::PhantomData<T>,
+}
+impl <T> Default for TemplateWithVar<T> {
+    fn default() -> Self { unsafe { ::std::mem::zeroed() } }
 }
 #[test]
 fn __bindgen_test_layout_template_1() {

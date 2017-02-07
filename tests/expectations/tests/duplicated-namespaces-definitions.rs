@@ -11,7 +11,7 @@ pub mod root {
         #[allow(unused_imports)]
         use self::super::super::root;
         #[repr(C)]
-        #[derive(Debug, Copy)]
+        #[derive(Debug, Default, Copy)]
         pub struct Bar {
             pub foo: ::std::os::raw::c_int,
             pub baz: bool,
@@ -49,6 +49,9 @@ pub mod root {
         }
         impl Clone for Foo {
             fn clone(&self) -> Self { *self }
+        }
+        impl Default for Foo {
+            fn default() -> Self { unsafe { ::std::mem::zeroed() } }
         }
     }
 }

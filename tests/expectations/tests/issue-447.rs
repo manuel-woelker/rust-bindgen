@@ -14,7 +14,7 @@ pub mod root {
             #[allow(unused_imports)]
             use self::super::super::super::root;
             #[repr(C)]
-            #[derive(Debug, Copy)]
+            #[derive(Debug, Default, Copy)]
             pub struct GuardObjectNotifier {
                 pub _address: u8,
             }
@@ -31,7 +31,7 @@ pub mod root {
         }
     }
     #[repr(C)]
-    #[derive(Debug, Copy)]
+    #[derive(Debug, Default, Copy)]
     pub struct JSAutoCompartment {
         pub _address: u8,
     }

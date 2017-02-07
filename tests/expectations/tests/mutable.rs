@@ -5,7 +5,7 @@
 
 
 #[repr(C)]
-#[derive(Debug, Copy)]
+#[derive(Debug, Default, Copy)]
 pub struct C {
     pub m_member: ::std::os::raw::c_int,
     pub m_other: ::std::os::raw::c_int,
@@ -25,7 +25,7 @@ impl Clone for C {
     fn clone(&self) -> Self { *self }
 }
 #[repr(C)]
-#[derive(Debug)]
+#[derive(Debug, Default)]
 pub struct NonCopiable {
     pub m_member: ::std::os::raw::c_int,
 }
@@ -38,7 +38,7 @@ fn bindgen_test_layout_NonCopiable() {
                 as usize } , 0usize);
 }
 #[repr(C)]
-#[derive(Debug)]
+#[derive(Debug, Default)]
 pub struct NonCopiableWithNonCopiableMutableMember {
     pub m_member: NonCopiable,
 }
